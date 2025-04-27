@@ -1,4 +1,3 @@
-
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
@@ -25,4 +24,6 @@ y_pred = model.predict(X_test)
 cm = confusion_matrix(y_test, y_pred)
 
 # Display the confusion matrix
-disp = ConfusionMatrixDisplay
+disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=data.target_names)
+disp.plot(cmap=plt.cm.Blues)
+plt.show()
