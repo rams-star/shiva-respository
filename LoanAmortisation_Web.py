@@ -108,13 +108,13 @@ if st.button("Calculate"):
 # Visualization
 # ===========================================================
 def plot_balance_chart(df):
-    fig, ax = plt.subplots()
-    ax.plot(df['Month'], df['Remaining Balance'], label='Balance')
-    ax.set_title('Remaining Balance Over Time')
-    ax.set_xlabel('Month')
-    ax.set_ylabel('Balance ($)')
-    ax.grid(True)
-    st.pyplot(fig)
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=df['Month'], y=df['Remaining Balance'], name='Balance'))
+    fig.update_layout(title='Remaining Balance Over Time',
+                      xaxis_title='Month', yaxis_title='Balance ($)')
+    st.plotly_chart(fig, use_container_width=True)
+
+
 
 
 
