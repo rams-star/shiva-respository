@@ -11,7 +11,7 @@ annual_rate = st.number_input("Annual Interest Rate (%)", min_value=0.0, step=0.
 extra_monthly = st.number_input("Extra Monthly Payment ($)", min_value=0.0, step=10.0)
 extra_annual = st.number_input("Extra Annual Payment ($)", min_value=0.0, step=100.0)
 
-loan_term_years = st.slider('Loan Term (Years)', min_value=5, max_value=40, value=30)
+loan_term_years = st.slider('Loan Term (Years)', min_value=1, max_value=30, value=30)
 total_months = loan_term_years * 12
 
 # Calculation logic
@@ -59,4 +59,5 @@ if st.button("Calculate"):
     st.download_button("Download Schedule as CSV", df.to_csv(index=False), "amortization_schedule.csv", "text/csv")
 
 # Note: This code is designed to run in a Streamlit environment.
+
 
