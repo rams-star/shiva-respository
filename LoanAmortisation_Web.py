@@ -55,12 +55,51 @@ def detailed_amortization_table(principal, annual_rate, extra_monthly, extra_ann
 
 # Display results
 if st.button("Calculate"):
-    if principal <= 0 or annual_rate <= 0:
-        st.error("Please enter valid loan details.")
+    if principal <= 0:
+        st.error("Please enter valid loan details: Loan amount must be greater than 0.")
+    
+    elif annual_rate < 0:
+        st.error("Interest rate must be zero or positive.")
+    
+    elif annual_rate == 0:
+        # Zero-interest logic: Equal payments, no interest
+        base_payment = principal / total_months
+        balance = principal
+        schedule = []
+
+        for month in range(1, total_months + 1):
+            annual_extra = extra_annual if month % 12 == 0 else 0
+            total_extra = extra_monthly + annual_extra
+            payment = base_payment + total_extra
+
+            if balance <= payment:
+                payment = balance
+                balance = 0
+            else:
+                balance -= payment
+
+            schedule.append([
+                month,
+                round(base_payment, 2),
+                extra_monthly,
+                annual_extra,
+                round(payment, 2),
+                round(payment, 2),
+                0.0,
+                round(balance, 2)
+            ])
+        
+        df = pd.DataFrame(schedule, columns=[
+            "Month", "Base Payment", "Extra Monthly", "Extra Annual",
+            "Total Payment", "Principal Paid", "Interest Paid", "Remaining Balance"
+        ])
+        st.success(f"Loan Paid Off in {len(df)} Months (0% Interest)")
+        st.dataframe(df)
+
     else:
         df = detailed_amortization_table(principal, annual_rate, extra_monthly, extra_annual)
         st.success(f"Loan Paid Off in {len(df)} Months")
         st.dataframe(df)
 
-    # Offer download
+    # Download button safely placed after df creation
     st.download_button("Download Schedule as CSV", df.to_csv(index=False), "amortization_schedule.csv", "text/csv")
