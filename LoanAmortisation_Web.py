@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 
 # Title and description
-st.title("Loan Amortization Calculator")
+st.title("Loan Amortisation Calculator")
 st.markdown("Enter your loan details below to calculate the repayment schedule, including extra payments.")
 
 # Input fields
@@ -10,6 +10,9 @@ principal = st.number_input("Loan Amount ($)", min_value=1000, step=500)
 annual_rate = st.number_input("Annual Interest Rate (%)", min_value=0.0, step=0.1)
 extra_monthly = st.number_input("Extra Monthly Payment ($)", min_value=0.0, step=10.0)
 extra_annual = st.number_input("Extra Annual Payment ($)", min_value=0.0, step=100.0)
+
+loan_term_years = st.slider('Loan Term (Years)', min_value=5, max_value=40, value=30)
+total_months = loan_term_years * 12
 
 # Calculation logic
 def detailed_amortization_table(principal, annual_rate, extra_monthly, extra_annual):
@@ -56,3 +59,4 @@ if st.button("Calculate"):
     st.download_button("Download Schedule as CSV", df.to_csv(index=False), "amortization_schedule.csv", "text/csv")
 
 # Note: This code is designed to run in a Streamlit environment.
+
