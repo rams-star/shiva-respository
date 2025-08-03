@@ -6,7 +6,7 @@ import pandas as pd
 # import plotly.graph_objects as go
 
 # Title and description
-st.title("Loan Amortization Calculator")
+st.title("Loan Amortisation Calculator")
 st.markdown("Enter your loan details below to calculate the repayment schedule, including extra payments.")
 
 # Input fields
@@ -63,3 +63,4 @@ if st.button("Calculate"):
     st.download_button("Download Schedule as CSV", df.to_csv(index=False), "amortization_schedule.csv", "text/csv")
 
 # Note: This code is designed to run in a Streamlit environment.
+
