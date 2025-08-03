@@ -3,7 +3,7 @@
 import streamlit as st
 import pandas as pd
 # import matplotlib.pyplot as plt
-# import plotly.graph_objects as go
+import plotly.graph_objects as go
 
 # Title and description
 st.title("Loan Amortization Calculator")
@@ -103,5 +103,6 @@ if st.button("Calculate"):
 
     # Download button safely placed after df creation
     st.download_button("Download Schedule as CSV", df.to_csv(index=False), "amortization_schedule.csv", "text/csv")
+
 
 
