@@ -1,8 +1,12 @@
+# Loan Amortization Calculator
+# ==========================================================
 import streamlit as st
 import pandas as pd
+# import matplotlib.pyplot as plt
+# import plotly.graph_objects as go
 
 # Title and description
-st.title("Loan Amortisation Calculator")
+st.title("Loan Amortization Calculator")
 st.markdown("Enter your loan details below to calculate the repayment schedule, including extra payments.")
 
 # Input fields
@@ -17,7 +21,7 @@ total_months = loan_term_years * 12
 # Calculation logic
 def detailed_amortization_table(principal, annual_rate, extra_monthly, extra_annual):
     monthly_rate = annual_rate / 12 / 100
-    minimum_monthly_payment = principal * (monthly_rate * (1 + monthly_rate) ** (30 * 12)) / ((1 + monthly_rate) ** (30 * 12) - 1)
+    minimum_monthly_payment = principal * (monthly_rate * (1 + monthly_rate) ** (loan_term_years * 12)) / ((1 + monthly_rate) ** (loan_term_years * 12) - 1)
     
     schedule = []
     balance = principal
@@ -59,5 +63,3 @@ if st.button("Calculate"):
     st.download_button("Download Schedule as CSV", df.to_csv(index=False), "amortization_schedule.csv", "text/csv")
 
 # Note: This code is designed to run in a Streamlit environment.
-
-
