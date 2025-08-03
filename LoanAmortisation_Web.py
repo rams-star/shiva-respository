@@ -107,12 +107,12 @@ if st.button("Calculate"):
 # ===========================================================
 # Visualization
 # ===========================================================
-def plot_balance_chart(df):
+if 'df' in locals():
     fig = go.Figure()
-    fig.add_trace(go.Scatter(x=df['Month'], y=df['Remaining Balance'], name='Balance'))
-    fig.update_layout(title='Remaining Balance Over Time',
-                      xaxis_title='Month', yaxis_title='Balance ($)')
-    st.plotly_chart(fig, use_container_width=True)
+    fig.add_trace(go.Scatter(x=df['Month'], y=df['Remaining Balance'], mode='lines+markers', name='Remaining Balance'))
+    fig.add_trace(go.Scatter(x=df['Month'], y=df['Total Payment'], mode='lines+markers', name='Total Payment'))
+    fig.update_layout(title='Loan Amortization Schedule', xaxis_title='Month', yaxis_title='Amount ($)')
+    st.plotly_chart(fig)
 
 
 
