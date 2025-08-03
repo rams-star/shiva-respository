@@ -114,6 +114,22 @@ if 'df' in locals():
     fig.update_layout(title='Loan Amortization Schedule', xaxis_title='Month', yaxis_title='Amount ($)')
     st.plotly_chart(fig)
 
+# Pie chart for payment distribution
+if 'df' in locals():
+    total_interest = df['Interest Paid'].sum()
+    total_principal = df['Principal Paid'].sum()
+    total_extra = df['Extra Monthly'].sum() + df['Extra Annual'].sum()
+
+    payment_distribution = {
+        'Principal': total_principal,
+        'Interest': total_interest,
+        'Extra Payments': total_extra
+    }
+
+    fig_pie = go.Figure(data=[go.Pie(labels=list(payment_distribution.keys()), values=list(payment_distribution.values()))])
+    fig_pie.update_layout(title='Payment Distribution')
+    st.plotly_chart(fig_pie)
+
 
 
 
