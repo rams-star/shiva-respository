@@ -1,7 +1,5 @@
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
-import plotly.graph_objects as go
 
 # Title and description
 st.title("Loan Amortization Calculator")
@@ -126,3 +124,4 @@ st.sidebar.number_input("Extra Annual Payment ($)", min_value=0.0, step=100.0, v
 # Make sure to run this script using `streamlit run LoanAmortisation_Web.py`
 # to see the interactive web application.
 # ==============================
+
