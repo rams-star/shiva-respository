@@ -118,7 +118,7 @@ if 'df' in locals():
 if 'df' in locals():
     total_interest = df['Interest Paid'].sum()
     total_principal = df['Principal Paid'].sum()
-    total_extra = df['Extra Monthly'].sum() + df['Extra Annual'].sum()
+    total_extra = df['Extra Monthly'].sum() + df['Extra Annual'].sum().sum()
 
     payment_distribution = {
         'Principal': total_principal,
@@ -126,7 +126,7 @@ if 'df' in locals():
         'Extra Payments': total_extra
     }
 
-        fig_pie = go.Figure(data=[go.Pie(labels=list(payment_distribution.keys()), 
+    fig_pie = go.Figure(data=[go.Pie(labels=list(payment_distribution.keys()), 
                                      values=list(payment_distribution.values())
                                      textinfo='label+percent',
                                      hoverinfo='label+value',
@@ -135,6 +135,7 @@ if 'df' in locals():
                                      )])
     fig_pie.update_layout(title='Payment Distribution')
     st.plotly_chart(fig_pie)
+
 
 
 
