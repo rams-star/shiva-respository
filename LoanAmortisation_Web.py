@@ -23,12 +23,6 @@ def detailed_amortization_table(principal, annual_rate, extra_monthly, extra_ann
     monthly_rate = annual_rate / 12 / 100
     minimum_monthly_payment = principal * (monthly_rate * (1 + monthly_rate) ** (loan_term_years * 12)) / ((1 + monthly_rate) ** (loan_term_years * 12) - 1)
     
-    if annual_rate <= 0:
-        # Calculate the total payment without interest
-        total_payment = principal + extra_monthly * total_months + extra_annual * loan_term_years
-        return pd.DataFrame()
-        st.warning("Interest rate must be greater than 0 for amortization calculations.")
-        
     schedule = []
     balance = principal
     month = 1
@@ -61,9 +55,12 @@ def detailed_amortization_table(principal, annual_rate, extra_monthly, extra_ann
 
 # Display results
 if st.button("Calculate"):
-    df = detailed_amortization_table(principal, annual_rate, extra_monthly, extra_annual)
-    st.success(f"Loan Paid Off in {len(df)} Months")
-    st.dataframe(df)
+    if principal <= 0 or annual_rate <= 0:
+        st.error("Please enter valid loan details.")
+    else:
+        df = detailed_amortization_table(principal, annual_rate, extra_monthly, extra_annual)
+        st.success(f"Loan Paid Off in {len(df)} Months")
+        st.dataframe(df)
 
     # Offer download
     st.download_button("Download Schedule as CSV", df.to_csv(index=False), "amortization_schedule.csv", "text/csv")
