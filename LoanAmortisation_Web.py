@@ -104,6 +104,22 @@ if st.button("Calculate"):
     # Download button safely placed after df creation
     st.download_button("Download Schedule as CSV", df.to_csv(index=False), "amortization_schedule.csv", "text/csv")
 
+# ===========================================================
+# Visualization
+# ===========================================================
+if 'df' in locals():
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=df['Month'], y=df['Remaining Balance'], mode='lines+markers', name='Remaining Balance'))
+    fig.add_trace(go.Scatter(x=df['Month'], y=df['Total Payment'], mode='lines+markers', name='Total Payment'))
+    fig.update_layout(title='Loan Amortization Schedule', xaxis_title='Month', yaxis_title='Amount ($)')
+    st.plotly_chart(fig)
+
+    # Bar chart for monthly payments
+    fig2, ax2 = plt.subplots()
+    df.plot(x='Month', y=['Minimum Payment', 'Extra Monthly', 'Extra Annual'], kind='bar', ax=ax2)
+    ax2.set_title('Monthly Payments Breakdown')
+    ax2.set_ylabel('Payment Amount ($)')
+    st.pyplot(fig2)
 
 
 
