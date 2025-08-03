@@ -6,14 +6,14 @@ import pandas as pd
 # import plotly.graph_objects as go
 
 # Title and description
-st.title("Loan Amortisation Calculator")
+st.title("Loan Amortization Calculator")
 st.markdown("Enter your loan details below to calculate the repayment schedule, including extra payments.")
 
 # Input fields
-principal = st.number_input("Loan Amount ($)", min_value=1000, step=500)
+principal = st.number_input("Loan Amount", min_value=1000, step=500)
 annual_rate = st.number_input("Annual Interest Rate (%)", min_value=0.0, step=0.1)
-extra_monthly = st.number_input("Extra Monthly Payment ($)", min_value=0.0, step=10.0)
-extra_annual = st.number_input("Extra Annual Payment ($)", min_value=0.0, step=100.0)
+extra_monthly = st.number_input("Extra Monthly Payment", min_value=0.0, step=10.0)
+extra_annual = st.number_input("Extra Annual Payment", min_value=0.0, step=100.0)
 
 loan_term_years = st.slider('Loan Term (Years)', min_value=1, max_value=30, value=30)
 total_months = loan_term_years * 12
@@ -23,6 +23,12 @@ def detailed_amortization_table(principal, annual_rate, extra_monthly, extra_ann
     monthly_rate = annual_rate / 12 / 100
     minimum_monthly_payment = principal * (monthly_rate * (1 + monthly_rate) ** (loan_term_years * 12)) / ((1 + monthly_rate) ** (loan_term_years * 12) - 1)
     
+    if annual_rate <= 0:
+        # Calculate the total payment without interest
+        total_payment = principal + extra_monthly * total_months + extra_annual * loan_term_years
+        return pd.DataFrame()
+        st.warning("Interest rate must be greater than 0 for amortization calculations.")
+        
     schedule = []
     balance = principal
     month = 1
@@ -61,6 +67,3 @@ if st.button("Calculate"):
 
     # Offer download
     st.download_button("Download Schedule as CSV", df.to_csv(index=False), "amortization_schedule.csv", "text/csv")
-
-# Note: This code is designed to run in a Streamlit environment.
-
