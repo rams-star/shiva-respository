@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import matplotlib.pyplot as plt
 import plotly.graph_objects as go
 
 # Title and description
@@ -73,43 +74,43 @@ st.sidebar.number_input("Extra Annual Payment ($)", min_value=0.0, step=100.0, v
 # Visualization
 # ==============================
 # Scatter plot of remaining balance and total payment over time
-if not df.empty:
-    fig = go.Figure()
-    fig.add_trace(go.Scatter(x=df['Month'], y=df['Remaining Balance'], mode='lines+markers', name='Remaining Balance'))
-    fig.add_trace(go.Scatter(x=df['Month'], y=df['Total Payment'], mode='lines+markers', name='Total Payment'))
+# if not df.empty:
+#     fig = go.Figure()
+#     fig.add_trace(go.Scatter(x=df['Month'], y=df['Remaining Balance'], mode='lines+markers', name='Remaining Balance'))
+#     fig.add_trace(go.Scatter(x=df['Month'], y=df['Total Payment'], mode='lines+markers', name='Total Payment'))
 
-    fig.update_layout(title='Loan Amortization Schedule',
-                      xaxis_title='Month',
-                      yaxis_title='Amount ($)',
-                      legend=dict(x=0, y=1, traceorder='normal'))
+#     fig.update_layout(title='Loan Amortization Schedule',
+#                       xaxis_title='Month',
+#                       yaxis_title='Amount ($)',
+#                       legend=dict(x=0, y=1, traceorder='normal'))
 
-    st.plotly_chart(fig)
+#     st.plotly_chart(fig)
 
-# Scatter plot of principal paid and interest paid over time
-    fig2 = go.Figure()
-    fig2.add_trace(go.Scatter(x=df['Month'], y=df['Principal Paid'], mode='lines+markers', name='Principal Paid'))
-    fig2.add_trace(go.Scatter(x=df['Month'], y=df['Interest Paid'], mode='lines+markers', name='Interest Paid'))
+# # Scatter plot of principal paid and interest paid over time
+#     fig2 = go.Figure()
+#     fig2.add_trace(go.Scatter(x=df['Month'], y=df['Principal Paid'], mode='lines+markers', name='Principal Paid'))
+#     fig2.add_trace(go.Scatter(x=df['Month'], y=df['Interest Paid'], mode='lines+markers', name='Interest Paid'))
 
-    fig2.update_layout(title='Principal and Interest Payments Over Time',
-                       xaxis_title='Month',
-                       yaxis_title='Amount ($)',
-                       hovermode='x unified',
-                       legend=dict(x=0, y=1, traceorder='normal'))
+#     fig2.update_layout(title='Principal and Interest Payments Over Time',
+#                        xaxis_title='Month',
+#                        yaxis_title='Amount ($)',
+#                        hovermode='x unified',
+#                        legend=dict(x=0, y=1, traceorder='normal'))
 
-    st.plotly_chart(fig2, use_container_width=True)
+#     st.plotly_chart(fig2, use_container_width=True)
 
-# Pie chart proportions of principal and interest paid
-    total_principal_paid = df['Principal Paid'].sum()
-    total_interest_paid = df['Interest Paid'].sum()
+# # Pie chart proportions of principal and interest paid
+#     total_principal_paid = df['Principal Paid'].sum()
+#     total_interest_paid = df['Interest Paid'].sum()
 
-    fig3 = go.Figure(data=[go.Pie(labels=['Principal Paid', 'Interest Paid'],
-                                   values=[total_principal_paid, total_interest_paid],
-                                   hole=0.3)])
+#     fig3 = go.Figure(data=[go.Pie(labels=['Principal Paid', 'Interest Paid'],
+#                                    values=[total_principal_paid, total_interest_paid],
+#                                    hole=0.3)])
 
-    fig3.update_layout(title='Total Payments Breakdown',
-                       legend=dict(x=0, y=1, traceorder='normal'))
+#     fig3.update_layout(title='Total Payments Breakdown',
+#                        legend=dict(x=0, y=1, traceorder='normal'))
 
-    st.plotly_chart(fig3, use_container_width=True)
+#     st.plotly_chart(fig3, use_container_width=True)
     
 # ==============================
 # Put it all together
@@ -125,9 +126,3 @@ if not df.empty:
 # Make sure to run this script using `streamlit run LoanAmortisation_Web.py`
 # to see the interactive web application.
 # ==============================
-
-
-
-
-    
-
