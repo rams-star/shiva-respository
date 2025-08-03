@@ -127,7 +127,7 @@ if 'df' in locals():
     }
 
     fig_pie = go.Figure(data=[go.Pie(labels=list(payment_distribution.keys()), 
-                                     values=list(payment_distribution.values())
+                                     values=list(payment_distribution.values()),
                                      textinfo='label+percent',
                                      hoverinfo='label+value',
                                      insidetextorientation='radial',
@@ -135,6 +135,7 @@ if 'df' in locals():
                                      )])
     fig_pie.update_layout(title='Payment Distribution')
     st.plotly_chart(fig_pie)
+
 
 
 
