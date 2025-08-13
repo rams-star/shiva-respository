@@ -128,13 +128,14 @@ if 'df' in locals():
 
     fig_pie = go.Figure(data=[go.Pie(labels=list(payment_distribution.keys()), 
                                      values=list(payment_distribution.values()),
-                                     textinfo='label+percent',
-                                     hoverinfo='label+value',
+                                     textinfo='label+value',
+                                     hoverinfo='label+percent',
                                      insidetextorientation='radial',
                                      hole=0.3,
                                      )])
     fig_pie.update_layout(title='Payment Distribution')
     st.plotly_chart(fig_pie)
+
 
 
 
