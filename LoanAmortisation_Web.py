@@ -144,9 +144,10 @@ if 'df' in locals():
     fig_bar.add_trace(go.Bar(x=df['Month'], y=df['Principal Paid'], name='Principal Paid', marker_color='blue'))
     fig_bar.add_trace(go.Bar(x=df['Month'], y=df['Interest Paid'], name='Interest Paid', marker_color='orange'))
     fig_bar.add_trace(go.Bar(x=df['Month'], y=df['Extra Monthly'], name='Extra Monthly', marker_color='green'))
-    fig_bar.update_layout(title='Monthly Breakdown of Payments', xaxis_title='Month', yaxis_title='Amount ($)',
+    fig_bar.update_layout(title='Breakdown of Payments', xaxis_title='Month', yaxis_title='Amount ($)',
                           barmode='stack')
     st.plotly_chart(fig_bar)
+
 
 
 
