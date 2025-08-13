@@ -136,7 +136,17 @@ if 'df' in locals():
     fig_pie.update_layout(title='Payment Distribution')
     st.plotly_chart(fig_pie)
 
-
+# ========================================================================================
+# Bar Chart to show total payments over time with interest, principal, and extra payments breakdown
+# ====================================================================================
+if 'df' in locals():
+    fig_bar = go.Figure()
+    fig_bar.add_trace(go.Bar(x=df['Month'], y=df['Principal Paid'], name='Principal Paid', marker_color='blue'))
+    fig_bar.add_trace(go.Bar(x=df['Month'], y=df['Interest Paid'], name='Interest Paid', marker_color='orange'))
+    fig_bar.add_trace(go.Bar(x=df['Month'], y=df['Extra Monthly'], name='Extra Monthly', marker_color='green'))
+    fig_bar.update_layout(title='Monthly Breakdown of Payments', xaxis_title='Month', yaxis_title='Amount ($)',
+                          barmode='stack')
+    st.plotly_chart(fig_bar)
 
 
 
