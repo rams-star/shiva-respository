@@ -137,16 +137,16 @@ if 'df' in locals():
     st.plotly_chart(fig_pie)
 
 # ========================================================================================
-# Bar Chart using matplotlib to show total payments over time with interest, principal, and extra payments breakdown
+# Bar Chart to show total payments over time with interest, principal, and extra payments breakdown
 # ====================================================================================
 if 'df' in locals():
-    fig_bar, ax = plt.subplots(figsize=(10, 6))
-    df.set_index('Month')[['Total Payment', 'Principal Paid', 'Interest Paid', 'Extra Monthly']].plot(kind='bar', stacked=True, ax=ax)
-    ax.set_title('Total Payments Over Time')
-    ax.set_xlabel('Month')
-    ax.set_ylabel('Amount ($)')
-    st.pyplot(fig_bar)
-
+    fig_bar = go.Figure()
+    fig_bar.add_trace(go.Bar(x=df['Month'], y=df['Principal Paid'], name='Principal Paid', marker_color='blue'))
+    fig_bar.add_trace(go.Bar(x=df['Month'], y=df['Interest Paid'], name='Interest Paid', marker_color='orange'))
+    fig_bar.add_trace(go.Bar(x=df['Month'], y=df['Extra Monthly'], name='Extra Monthly', marker_color='green'))
+    fig_bar.update_layout(title='Monthly Breakdown of Payments', xaxis_title='Month', yaxis_title='Amount ($)',
+                          barmode='stack')
+    st.plotly_chart(fig_bar)
 
 
 
